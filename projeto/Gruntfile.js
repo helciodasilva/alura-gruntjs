@@ -45,6 +45,43 @@ module.exports = function(grunt) {
 			minificados: {
 				src: ['dist/js/**/*.min.js', 'dist/css/**/*.min.css']
 			}
+        },
+        
+		coffee: {
+			compilar: {
+				expand: true,
+				cwd: 'public/coffee',
+				src: ['**/*.coffee'],
+				dest: 'public/js',
+				ext: '.js'
+			}
+		},
+
+		less: {
+			compilar: {
+				expand: true,
+				cwd: 'public/less',
+				src: ['**/*.less'],
+				dest: 'public/css',
+				ext: '.css'
+			}
+        },
+        
+		watch: {
+			coffee: {
+				options: {
+					event: ['added','changed']
+				},
+				files: 'public/coffee/**/*.coffee',
+				tasks: 'coffee:compilar'
+			},
+			less: {
+				options: {
+					event: ['added','changed']
+				},
+				files: 'public/less/**/*.less',
+				tasks: 'less:compilar'
+			}
 		}
 
   });
@@ -59,5 +96,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-usemin');
   grunt.loadNpmTasks('grunt-rev');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-coffee');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
 };
