@@ -20,12 +20,22 @@ module.exports = function(grunt) {
 
          usemin: {
              html: 'dist/**/*.html'
-         }
+         },
+
+         imagemin: {
+			public: {
+				expand: true,
+				cwd: 'dist/img',
+				src: '**/*.{png,jpg,gif}',
+				dest: 'dist/img'
+			}
+		}
+
   });
 
   grunt.registerTask('default', ['dist', 'minifica']);
   grunt.registerTask('dist', ['clean', 'copy']);
-  grunt.registerTask('minifica', ['useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin']);
+  grunt.registerTask('minifica', ['useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin', 'imagemin']);
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
